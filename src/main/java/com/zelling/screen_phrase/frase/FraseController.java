@@ -19,4 +19,10 @@ public class FraseController {
     public void criarFrase(@RequestBody Frase frase){
         service.criarFrase(frase);
     }
+
+    @GetMapping("/serie/{nome}")
+    public void procurarSerie(@PathVariable String nome){
+        System.out.println(nome);
+        service.procurarSeriePoster(nome);
+    }
 }
