@@ -16,24 +16,31 @@ public class FraseService {
     }
 
     public void criarFrase(Frase frase){
+        String poster = procurarSeriePoster(frase.getTitulo());
+
+        if(poster.length() < 10) {
+            poster = "poster not found";
+        }
+
         Frase novaFrase = new Frase(
                 frase.getTitulo(),
                 frase.getFrase(),
                 frase.getPersonagem(),
-                frase.getPoster()
+                poster
         );
 
         try{
-            repository.save(frase);
+            repository.save(novaFrase);
+            System.out.println("frase salva com sucesso.");
         } catch (Exception e) {
             throw new RuntimeException("não foi possível criar uma frase no banco de dados. Erro: " + e.getLocalizedMessage());
         }
 
         System.out.println(
-                "frase: " + frase.getFrase() +
-                ", titulo: " + frase.getTitulo() +
-                ", personagem: " + frase.getPersonagem() +
-                ", poster: " + frase.getPoster()
+                "frase: " + novaFrase.getFrase() +
+                ", titulo: " + novaFrase.getTitulo() +
+                ", personagem: " + novaFrase.getPersonagem() +
+                ", poster: " + novaFrase.getPoster()
         );
     }
 
