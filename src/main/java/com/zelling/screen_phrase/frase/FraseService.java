@@ -4,6 +4,9 @@ import com.zelling.screen_phrase.util.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Random;
+
 @Service
 public class FraseService {
     @Autowired
@@ -11,8 +14,9 @@ public class FraseService {
     private Api api = new Api();
 
     public Frase retornarFrase(){
-        Frase frase = new Frase("rocky", "teste", "rocky asap", "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.9BPDlvHHp_8vhgkcxa9SrQAAAA%26pid%3DApi&f=1&ipt=8634639f41c2fc7409bd8c1e414170c434925b78f5bd322fd375e2a2e05c120d&ipo=images");
-        return frase;
+        Random random = new Random();
+        List<Frase> fraseList = repository.findAll();
+        return fraseList.get(random.nextInt(fraseList.size()));
     }
 
     public void criarFrase(Frase frase){
